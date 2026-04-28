@@ -54,13 +54,19 @@ class UserController extends Controller
                 ]));
         }
 
+        $players = [];
         $scores = Score::query()
-            ->select("games.id, games.description, games.slug, games.title, scores.score, scores.created_at")
-            ->where("scores.user_id", $user['id'])
-            ->leftJoin("game_versions", "scores.game_version_id", "=", "game_versions.id")
-            ->leftJoin("games", "game_versions.game_id", "=", "games.id")
-            ->groupBy("games.id")
+            ->where("user_id", $user['id'])
+            ->orderByDesc("score")
             ->get()
+            ->filter(function($v) use(&$players) {
+                if (in_array($v->user_id, $players)) {
+                    return false;
+                }
+
+                array_push($players, $v->user_id);
+                return true;
+            })
             ->map(function($v) {
                 $scoreGame = GameVersion::query()->where("id", $v->game_version_id)->first()->game;
 
@@ -73,7 +79,8 @@ class UserController extends Controller
                     "score" => $v->score,
                     "timestamp" => $v->created_at
                 ];
-            });
+            })
+            ->values();
 
         return response()->json([
            "username" => $user['username'],
