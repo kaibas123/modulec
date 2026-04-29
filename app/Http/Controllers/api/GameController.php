@@ -14,6 +14,7 @@ class GameController extends Controller
     /**
      * Display a listing of the resource.
      */
+//    function for load game list
     public function index(Request $request)
     {
         $request->validate([
@@ -53,6 +54,7 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+//    function for save new game
     public function store(Request $request)
     {
         $val = $request->validate([
@@ -81,6 +83,7 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      */
+//    function for separate game data
     public function show(Game $game)
     {
         $game = Arr::except($game->toArray(), ["id", "user_id", "created_at", "updated_at", "deleted_at", "latest_version"]);
@@ -91,6 +94,7 @@ class GameController extends Controller
     /**
      * Update the specified resource in storage.
      */
+//    function for update game data
     public function update(Request $request, Game $game)
     {
         $val = $request->validate([
@@ -118,6 +122,7 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+//    function for delete game data
     public function destroy(Game $game)
     {
         if ($game['user_id'] !== auth()->user()->id) {

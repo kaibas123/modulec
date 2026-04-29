@@ -12,6 +12,7 @@ class ScoreController extends Controller
     /**
      * Display a listing of the resource.
      */
+//    function for load all game's score
     public function index(Game $game)
     {
         $scores = $game->scores()->get()->map(fn($v) => ([
@@ -28,6 +29,7 @@ class ScoreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+//    function for save score data
     public function store(Request $request, Game $game)
     {
         Score::query()->create([
@@ -44,24 +46,4 @@ class ScoreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

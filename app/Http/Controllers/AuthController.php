@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+//    function for view login page
     public function login()
     {
         return view("login");
     }
 
+//    function for do login
     public function login_action(Request $request)
     {
         $request->validate([
@@ -31,6 +33,7 @@ class AuthController extends Controller
         }
     }
 
+//    function for do logout
     public function logout()
     {
         Auth::logout();

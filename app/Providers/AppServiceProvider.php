@@ -21,7 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+//        set model ungard
         Model::unguard();
+//        set carbon format Y-m-dTH:i:s.vZ
         Carbon::serializeUsing(function($date) {
             return $date->format("Y-m-d\TH:i:s\.v\Z");
         });

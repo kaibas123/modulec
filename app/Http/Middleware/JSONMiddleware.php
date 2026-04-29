@@ -13,6 +13,7 @@ class JSONMiddleware
      *
      * @param  Closure(Request): (Response)  $next
      */
+//    function for set header to Accept application/json in api path
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->is("api/*")) {

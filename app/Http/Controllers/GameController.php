@@ -60,7 +60,7 @@ class GameController extends Controller
         return to_route("games_detail", $id)->with("msg", "Score deleted");
     }
 
-
+//    delete all score in game
     public function delete_all(Game $game)
     {
         $s = $game->scores;

@@ -12,6 +12,7 @@ use Mockery\Exception;
 
 class VersionController extends Controller
 {
+//    function for save new version
     public function store(Game $game, Request $request)
     {
         $request->validate([

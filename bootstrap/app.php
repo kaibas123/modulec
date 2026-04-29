@@ -12,9 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+//        set middleware all of functions
         $middleware->append(\App\Http\Middleware\JSONMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+//        if validate error come return special message
         $exceptions->renderable(function (\Illuminate\Validation\ValidationException $e) {
             $errors = $e->errors();
 
@@ -29,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
             ], 400);
         });
 
+//        if authorization error come return special message
         $exceptions->renderable(function (\Illuminate\Auth\AuthenticationException $e, $request) {
             $token = request()->bearerToken();
 
@@ -49,6 +52,7 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
+//        if 404 error come return special message
         $exceptions->renderable(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e) {
             return response()->json([
                 "status" => "not-found",

@@ -10,11 +10,13 @@ class GameVersion extends Model
 {
     use SoftDeletes;
 
+//    get version's thumbnail
     public function getThumbnail()
     {
         return $this->path."thumbnail.png";
     }
 
+//    check this version has thumbnail
     public function hasThumbnail()
     {
         if (Storage::disk('local')->exists($this->getThumbnail())) {
@@ -23,6 +25,7 @@ class GameVersion extends Model
         return null;
     }
 
+//    get game of version
     public function game()
     {
         return $this->belongsTo(Game::class);

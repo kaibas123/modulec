@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+//    function for sign up
     function signup(Request $request)
     {
         $val = $request->validate([
@@ -27,6 +28,7 @@ class AuthController extends Controller
         ], 201);
     }
 
+//    function for sign in
     function signin(Request $request)
     {
         $request->validate([
@@ -57,6 +59,7 @@ class AuthController extends Controller
         ]);
     }
 
+//    function for sign out
     public function signout(Request $request)
     {
         auth()->user()->tokens()->delete();
